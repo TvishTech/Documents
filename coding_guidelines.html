@@ -1,0 +1,109 @@
+<h2 id="general-coding-guidelines">General coding guidelines</h2>
+<h3 id="comments">Comments</h3>
+<ul>
+<li>Every script/class/interface that you write must contain a general comment with at least one sentence describing 
+what the class or interface does or helps in.</li>
+</ul>
+<pre><code class="lang-java">    <span class="hljs-comment">/*
+    * Copyright 2020 The Android Open Source Project
+    *
+    * Licensed under the Apache License, Version 2.0 (the "License");
+    * you may not use this file except in compliance with the License.
+    * You may obtain a copy of the License at
+    *
+    * java class containing function definitions pertaining to sending and receiving data over http connection
+    * between server and multiple clients
+    * 
+    */</span>
+
+    <span class="hljs-selector-tag">package</span> <span class="hljs-selector-tag">com</span><span class="hljs-selector-class">.android</span><span class="hljs-selector-class">.internal</span><span class="hljs-selector-class">.foo</span>;
+
+    <span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">android</span><span class="hljs-selector-class">.os</span><span class="hljs-selector-class">.Blah</span>;
+    <span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">android</span><span class="hljs-selector-class">.view</span><span class="hljs-selector-class">.Yada</span>;
+
+    <span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">java</span><span class="hljs-selector-class">.sql</span><span class="hljs-selector-class">.ResultSet</span>;
+    <span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">java</span><span class="hljs-selector-class">.sql</span><span class="hljs-selector-class">.SQLException</span>;
+</code></pre>
+<ul>
+<li><p>Every nontrivial method that you write must contain a Javadoc comment with at least one sentence describing what 
+the class or method does. This sentence should start with a third person descriptive verb.</p>
+<pre><code class="lang-java">  <span class="hljs-comment">/** Returns the correctly rounded positive square root of a double value. */</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span> <span class="hljs-title">sqrt</span><span class="hljs-params">(<span class="hljs-keyword">double</span> a)</span> </span>{
+      ...
+  }
+</code></pre>
+</li>
+<li><p>Use TODO comments: Use TODO comments for code that is temporary, a short-term solution, or good enough but not perfect.
+These comments should include the string TODO in all caps, followed by a colon.</p>
+<pre><code class="lang-java">    // TODO: <span class="hljs-keyword">Remove</span> this code <span class="hljs-built_in">after</span> the UrlTable2 has been checked <span class="hljs-built_in">in</span>.
+</code></pre>
+</li>
+</ul>
+<hr>
+<h3 id="coding-practices">Coding practices</h3>
+<ul>
+<li><h3 id="write-short-methods">Write short methods</h3>
+</li>
+</ul>
+<ul>
+<li><p>When feasible, keep methods small and focused.</p>
+</li>
+<li><p>If a method exceeds 40 lines or so, think about whether it can be broken up without harming the structure of the program.</p>
+</li>
+</ul>
+<ul>
+<li><h3 id="define-variables-in-standard-places">Define variables in standard places</h3>
+<ul>
+<li>Define variables either at the beginning of the class/main method or immediately before the methods that use them.</li>
+</ul>
+</li>
+<li><h3 id="limit-variable-scope">Limit variable scope</h3>
+<ul>
+<li><p>Declare local variables at the point where they are first used. Keep the scope of local variables to a minimum.</p>
+</li>
+<li><p>This increases the readability and maintainability of your code and reduces the likelihood of error.</p>
+</li>
+<li><p>Declare loop variables in the for statement itself unless there&#39;s a compelling reason to do otherwise.</p>
+</li>
+</ul>
+<pre><code class="lang-java">  for (<span class="hljs-name">Iterator</span> i = c.iterator()<span class="hljs-comment">; i.hasNext(); ) {</span>
+      doSomethingElse(<span class="hljs-name">i</span>.next())<span class="hljs-comment">;</span>
+  }
+</code></pre>
+</li>
+<li><h3 id="order-import-statements-and-add-simple-comments-for-a-group-of-import-statements-that-have-similar-usecases-">Order import statements and add simple comments for a group of import statements that have similar usecases.</h3>
+</li>
+<li><h3 id="follow-field-naming-conventions">Follow field naming conventions</h3>
+<ul>
+<li><p>Non-public, non-static field names start with <em>m</em>.</p>
+</li>
+<li><p>Static field names start with <em>s</em>.</p>
+</li>
+<li><p>Other fields start with a lower case letter.</p>
+</li>
+<li><p>Public static final fields (constants) are _ALL_CAPS_WITH<em>UNDERSCORES</em>.</p>
+</li>
+</ul>
+<pre><code class="lang-java">    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span> </span>{
+      <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> SOME_CONSTANT = <span class="hljs-number">42</span>;
+      <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> publicField;
+      <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> MyClass sSingleton;
+      <span class="hljs-keyword">int</span> mPackagePrivate;
+      <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mPrivate;
+      <span class="hljs-keyword">protected</span> <span class="hljs-keyword">int</span> mProtected;
+  }
+</code></pre>
+</li>
+<li><h3 id="limit-line-length">Limit line length</h3>
+<ul>
+<li><p>Each line of text in your code should be at most 100 characters long.</p>
+</li>
+<li><p>If a comment line contains an example command or a literal URL longer than 100 characters, that line may
+be longer than 100 characters for ease of cut and paste.</p>
+</li>
+<li><p>Import lines can go over the limit.</p>
+</li>
+</ul>
+</li>
+</ul>
